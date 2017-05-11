@@ -12,10 +12,13 @@ angular.module('roomService', [])
 		return $http.post('/api/rooms/', roomData);
 	};
 
-	roomFactory.test = function() {
-		var test = "works laa"
-		return test;
-	};
+	roomFactory.view = function(room_id) {
+		return $http.get('api/rooms/' + room_id);
+	}
+
+	roomFactory.chat = function(room_id, message) {
+		return $http.put('api/rooms/' + room_id, message);
+	}
 
 	return roomFactory;
 });

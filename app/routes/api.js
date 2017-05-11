@@ -7,12 +7,12 @@ module.exports = function(app, express) {
 
 	var apiRouter = express.Router();
 
-	apiRouter.get('/', function(req, res) {
-		res.json({ message: 'hooray! welcome to our api!' });
-	});
+	apiRouter.route('/')
+		.get(function(req, res) {
+			res.json({ message: 'hooray! welcome to our api!' });
+		});
 
 	apiRouter.route('/rooms')
-
 		.post(function(req, res) {
 
 			var room = new Room();
@@ -20,25 +20,43 @@ module.exports = function(app, express) {
 
 			room.save(function(err) {
 				if (err) {
-					if (err.code == 11000)
-						return res.json({ success: false, message: 'A user with that username already exists. '});
-					else
 						return res.send(err);
 				}
 
 				res.json({
 					message: 'User created!',
-					roomName: req.body
+					roomName: req.body.roomName
 			 });
 			});
 
 		})
-
 		.get(function(req, res) {
 			Room.find({}, function(err, data){
 				if (err) res.send(err);
 		    res.json(data);
 			});
+		})
+
+	apiRouter.route('/rooms/:room_id')
+		.get(function(req, res) {
+			Room.findById(req.params.room_id, function(err, room){
+				if (err) res.send(err);
+				res.json(room);
+			});
+		})
+		.put(function(req, res) {
+			Room.findById(req.params.room_id, function(err, room){
+				if (err) res.send(err);
+				room.chats.push({
+					message: req.body.newMessage
+				})
+
+				room.save(function(err, data) {
+					if (err) res.send(err);
+					res.json(data);
+				});
+
+			})
 		})
 
 	return apiRouter;

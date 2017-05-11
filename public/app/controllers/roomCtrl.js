@@ -14,7 +14,25 @@ angular.module('roomCtrl', ['roomService'])
 	vm.saveRoom = function() {
 		Room.create(vm.roomData)
 		.then(function(data){
-			vm.roomname = vm.roomData.roomName;
+			vm.roomname = data.data.roomName;
 		})
 	};
+})
+
+.controller('roomSingleController', function($routeParams, $scope, Room) {
+	var vm = this;
+	vm.roomData = {};
+	vm.message = {};
+
+	Room.view($routeParams.room_id)
+	.then(function(data){
+		vm.roomData = data
+	})
+
+	vm.saveChat = function() {
+		Room.chat($routeParams.room_id, vm.message)
+		.then(function(data){
+			vm.roomData = data
+		})
+	}
 })
