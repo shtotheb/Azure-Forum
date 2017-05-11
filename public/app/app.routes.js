@@ -9,7 +9,15 @@ angular.module('app.routes', ['ngRoute'])
 		})
 
 		.when('/rooms', {
-			templateUrl: 'app/views/pages/roomSearch.html'
+			templateUrl: 'app/views/pages/roomSearch.html',
+      controller: 'roomController',
+      controllerAs: 'room'
+		})
+
+		.when('/roomCreate', {
+			templateUrl: 'app/views/pages/roomCreate.html',
+      controller: 'roomCreateController',
+      controllerAs: 'room'
 		})
 
 	$locationProvider.html5Mode(true);

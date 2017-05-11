@@ -1,1 +1,1 @@
-angular.module('azureChat', ['ngAnimate', 'app.routes'])
+angular.module('azureChat', ['ngAnimate', 'app.routes', 'roomCtrl', 'roomService'])
