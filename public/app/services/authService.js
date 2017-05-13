@@ -2,11 +2,9 @@ angular.module('authService', [])
 
   .factory('Auth', function($http, $q, AuthToken) {
   	var authFactory = {};
-  	authFactory.login = function(username, password) {
-  		return $http.post('/api/authenticate', {
-  			username: username,
-  			password: password
-  		})
+
+  	authFactory.login = function(loginData) {
+  		return $http.post('/api/authenticate', loginData)
 			.then(function(data) {
 				    AuthToken.setToken(data.token);
        			return data;
@@ -32,7 +30,7 @@ angular.module('authService', [])
   		else
   			return $q.reject({ message: 'User has no token.' });
   	};
-    
+
   	return authFactory;
   })
 

@@ -2,6 +2,7 @@ angular.module('mainCtrl', [])
 
   .controller('mainController', function($rootScope, $location, Auth){
     var vm = this;
+    vm.error = 'No error so far...';
     vm.loggedIn = Auth.isLoggedIn();
 
     $rootScope.$on('$routeChangeStart', function() {
@@ -21,17 +22,14 @@ angular.module('mainCtrl', [])
     }
 
     vm.doLogin = function() {
-
   		vm.error = '';
-
-  		Auth.login(vm.loginData.username, vm.loginData.password)
+  		Auth.login(vm.loginData)
   			.then(function(data) {
-
   				if (data.success)
-  					$location.path('/users');
+  					// $location.path('/users');
+            vm.error = data.data.message;
   				else
-  					vm.error = data.message;
-
+  					vm.error = data.data.message;
   			});
   	};
 
