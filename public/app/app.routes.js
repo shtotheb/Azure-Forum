@@ -8,6 +8,18 @@ angular.module('app.routes', ['ngRoute'])
 			templateUrl: 'app/views/pages/home.html'
 		})
 
+		.when('/login', {
+			templateUrl: 'app/views/pages/login.html',
+			controller: 'mainController',
+			controllerAs: 'login'
+		})
+
+		.when('/signup', {
+			templateUrl: 'app/views/pages/signup.html',
+			controller: 'mainController',
+			controllerAs: 'signup'
+		})
+
 		.when('/rooms', {
 			templateUrl: 'app/views/pages/roomSearch.html',
       controller: 'roomController',
