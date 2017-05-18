@@ -5,7 +5,9 @@ angular.module('app.routes', ['ngRoute'])
 	$routeProvider
 
 		.when('/', {
-			templateUrl: 'app/views/pages/home.html'
+			templateUrl: 'app/views/pages/roomSearch.html',
+			controller: 'roomController',
+			controllerAs: 'room'
 		})
 
 		.when('/login', {
@@ -20,19 +22,13 @@ angular.module('app.routes', ['ngRoute'])
 			controllerAs: 'signup'
 		})
 
-		.when('/rooms', {
-			templateUrl: 'app/views/pages/roomSearch.html',
-      controller: 'roomController',
-      controllerAs: 'room'
-		})
-
 		.when('/rooms/:room_id', {
 			templateUrl: 'app/views/pages/roomSingle.html',
 			controller: 'roomSingleController',
 			controllerAs: 'room'
 		})
 
-		.when('/roomCreate', {
+		.when('/roomcreate', {
 			templateUrl: 'app/views/pages/roomCreate.html',
       controller: 'roomCreateController',
       controllerAs: 'room'

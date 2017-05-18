@@ -1,7 +1,14 @@
-LOGIN
-<div>
-  Username : <input type="text" ng-model="login.loginData.username">
-	Password : <input type="password" ng-model="login.loginData.password">
-	<button ng-click = "login.doLogin()" type="submit">Login</button>
+<p class="text-danger">{{login.error}}</p>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Login</h3>
+  </div>
+  <div class="panel-body">
+    <p>Username<br>
+    <input type="text" ng-model="login.loginData.username"></p>
+  	<p>Password<br>
+    <input type="password" ng-model="login.loginData.password"></p>
+    <p><button ng-click = "login.doLogin()" type="submit" class="btn btn-primary btn-lg">Login</button></p>
+    <p><a href="/signup">Don't have an account?</a></p>
+  </div>
 </div>
-{{login.error}}

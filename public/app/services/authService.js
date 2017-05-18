@@ -6,7 +6,7 @@ angular.module('authService', [])
   	authFactory.login = function(loginData) {
   		return $http.post('/api/authenticate', loginData)
 			.then(function(data) {
-				    AuthToken.setToken(data.token);
+				    AuthToken.setToken(data.data.token);
        			return data;
 			});
   	};
@@ -18,17 +18,14 @@ angular.module('authService', [])
   	authFactory.logout = function() {AuthToken.setToken();};
 
   	authFactory.isLoggedIn = function() {
-  		if (AuthToken.getToken())
-  			return true;
-  		else
-  			return false;
+  		if (AuthToken.getToken()) return true;
+  		else return false;
   	};
 
   	authFactory.getUser = function() {
   		if (AuthToken.getToken())
-  			return $http.get('/api/me', { cache: true });
-  		else
-  			return $q.reject({ message: 'User has no token.' });
+      return $http.get('/api/me', { cache: true });
+  		else return $q.reject({ message: 'User has no token.' });
   	};
 
   	return authFactory;
@@ -38,10 +35,8 @@ angular.module('authService', [])
   	var authTokenFactory = {};
   	authTokenFactory.getToken = function() {return $window.localStorage.getItem('token')};
   	authTokenFactory.setToken = function(token) {
-  		if (token)
-  			$window.localStorage.setItem('token', token);
-  	 	else
-  			$window.localStorage.removeItem('token');
+  		if (token) $window.localStorage.setItem('token', token);
+  	 	else $window.localStorage.removeItem('token');
   	};
   	return authTokenFactory;
   })
@@ -50,8 +45,7 @@ angular.module('authService', [])
   	var interceptorFactory = {};
   	interceptorFactory.request = function(config) {
   		var token = AuthToken.getToken();
-  		if (token)
-  			config.headers['x-access-token'] = token;
+  		if (token) config.headers['x-access-token'] = token;
   		return config;
   	};
 

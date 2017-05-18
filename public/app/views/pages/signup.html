@@ -1,8 +1,15 @@
-SIGNUP
-<div>
-  Name     : <input type="name" ng-model="signup.signupData.name"><br>
-  Username : <input type="text" ng-model="signup.signupData.username"><br>
-	Password : <input type="password" ng-model="signup.signupData.password"><br>
-	<button ng-click="signup.doSignup()" type="submit">Sign Up</button><br>
+<p class="text-danger">{{login.message}}</p>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Sign Up</h3>
+  </div>
+  <div class="panel-body">
+    <p>Name<br>
+    <input type="text" ng-model="signup.signupData.name"></p>
+    <p>Username<br>
+    <input type="text" ng-model="signup.signupData.username"></p>
+  	<p>Password<br>
+    <input type="password" ng-model="signup.signupData.password"></p>
+    <p><button ng-click="signup.doSignup()" type="submit" class="btn btn-primary btn-lg">Sign Up</button></p>
+  </div>
 </div>
-{{signup.message}}

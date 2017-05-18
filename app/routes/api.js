@@ -107,16 +107,11 @@ module.exports = function(app, express) {
 
 			var room = new Room();
 			room.roomName = req.body.roomName;
+			room.roomDesc = req.body.roomDesc;
 
-			room.save(function(err) {
-				if (err) {
-						return res.send(err);
-				}
-
-				res.json({
-					message: 'User created!',
-					roomName: req.body.roomName
-			 });
+			room.save(function(err, data) {
+				if (err) {return res.send(err);}
+				res.json(data);
 			});
 
 		})
@@ -138,6 +133,7 @@ module.exports = function(app, express) {
 			Room.findById(req.params.room_id, function(err, room){
 				if (err) res.send(err);
 				room.chats.push({
+					name: req.body.name,
 					message: req.body.newMessage
 				})
 
@@ -148,6 +144,10 @@ module.exports = function(app, express) {
 
 			})
 		})
+
+	apiRouter.get('/me', function(req, res) {
+		res.send(req.decoded);
+	});
 
 	return apiRouter;
 };

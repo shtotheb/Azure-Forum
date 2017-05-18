@@ -1,11 +1,22 @@
-Room Name   : {{room.roomData.data.roomName}}<br>
-Created     : {{room.roomData.data.imported}}<br>
-Last Active : {{room.roomData.data.updated}}<br>
+<div class="jumbotron">
+  <div class="row">
+    <div class="col-7">
+      <h1>{{room.roomData.data.roomName}}</h1><br>
+      <h4>{{room.roomData.data.roomDesc}}</h4>
+    </div>
+    <div class="col-5">
+      <h4>New Comment</h4><br>
+      <textarea ng-model="room.message.newMessage" rows="4" cols="50" id="textArea"></textarea><br>
+      <button class="btn btn-primary btn-lg" type="submit" value="Submit" ng-click="room.saveChat(main.user.name)">Send</button>
+    </div>
+  </div>
+</div>
 
-<a href='/rooms'>Back</a><br>
-<textarea ng-model="room.message.newMessage" rows="4" cols="50"></textarea><br>
-<button type="submit" value="Submit" ng-click="room.saveChat()">Send</button><br>
-
-<ul ng-repeat="warez in room.roomData.data.chats">
-  <li>{{warez.message}}</li>
-</ul>
+<div class="panel panel-default" ng-repeat="warez in room.roomData.data.chats | orderBy:'imported':true">
+  <div class="panel-heading">
+    {{warez.name}}
+  </div>
+  <div class="panel-body">
+    {{warez.message}}
+  </div>
+</div>

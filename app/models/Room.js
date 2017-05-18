@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
-var ChatSchema = mongoose.Schema({
-  username:   { type: String, index: true },
+var CommentSchema = mongoose.Schema({
+  name:   { type: String, index: true },
   message:    { type: String, index: true },
   imported:   { type: Date, default: Date.now, index: true}
 })
@@ -9,7 +9,8 @@ var ChatSchema = mongoose.Schema({
 var RoomSchema = mongoose.Schema({
   createdBy:  { type: String, index: true },
   roomName:   { type: String, index: true },
-  chats:      [ChatSchema],
+  roomDesc:   { type: String },
+  chats:      [CommentSchema],
   imported:   {type: Date, default: Date.now, index: true},
   updated:    {type: Date, default: Date.now, index: true}
 });

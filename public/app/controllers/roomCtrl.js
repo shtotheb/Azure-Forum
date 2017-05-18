@@ -8,13 +8,13 @@ angular.module('roomCtrl', ['roomService'])
 	})
 })
 
-.controller('roomCreateController', function(Room) {
+.controller('roomCreateController', function($location, Room) {
 	var vm = this;
 	vm.roomData = {};
 	vm.saveRoom = function() {
 		Room.create(vm.roomData)
 		.then(function(data){
-			vm.roomname = data.data.roomName;
+			$location.path('/rooms/' + data.data._id)
 		})
 	};
 })
@@ -29,7 +29,8 @@ angular.module('roomCtrl', ['roomService'])
 		vm.roomData = data
 	})
 
-	vm.saveChat = function() {
+	vm.saveChat = function(name) {
+		vm.message.name = name;
 		Room.chat($routeParams.room_id, vm.message)
 		.then(function(data){
 			vm.roomData = data

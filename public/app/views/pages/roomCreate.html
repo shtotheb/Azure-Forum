@@ -1,6 +1,12 @@
-ROOM CREATE<br>
-Room Name: <input type="text" ng-model="room.roomData.roomName"><br>
-Created : {{room.roomname}}<br>
-
-<button type="submit" value="Submit" ng-click="room.saveRoom()">Create</button><br>
-<a href="/">Back</a>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Create Room</h3>
+  </div>
+  <div class="panel-body">
+    Room Name {{room.roomData._id}}<br>
+    <input class="input-lg" type="text" ng-model="room.roomData.roomName"><br>
+    Room Description<br>
+    <input class="input-lg" type="text" ng-model="room.roomData.roomDesc">
+    <button ng-click = "room.saveRoom()" type="submit" class="btn btn-primary btn-lg">Create</button>
+  </div>
+</div>
